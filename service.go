@@ -27,10 +27,13 @@ func (s *DogFactService) GetDogFact(ctx context.Context) (*DogFact, error) {
 	}
 	defer resp.Body.Close()
 
-	fact := &DogFact{}
-	if err := json.NewDecoder(resp.Body).Decode(fact); err != nil {
+	data := &DogData{}
+	if err := json.NewDecoder(resp.Body).Decode(data); err != nil {
 		return nil, err
 	}
+
+	fact := &DogFact{}
+	fact.Fact = data.Data[0].Attributes.Fact
 
 	return fact, nil
 }
