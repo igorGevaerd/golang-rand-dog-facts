@@ -18,7 +18,7 @@ func NewLoggingService(next Service) Service {
 
 func (s *LoggingService) GetDogFact(ctx context.Context) (fact *DogFact, err error) {
 	defer func(start time.Time) {
-		fmt.Printf("fact=%v err=%s took=%v", fact, err, time.Since(start))
+		fmt.Printf("fact=%s err=%v took=%v\n", fact.Fact, err, time.Since(start))
 	}(time.Now())
 
 	return s.next.GetDogFact(ctx)
