@@ -1,8 +1,6 @@
 package main
 
 import (
-	"context"
-	"fmt"
 	"log"
 )
 
@@ -10,11 +8,14 @@ func main() {
 	svc := NewDogFactService("https://dogapi.dog/api/v2/facts?limit=1")
 	svc = NewLoggingService(svc)
 
-	fact, err := svc.GetDogFact(context.TODO())
-	if err != nil {
-		log.Fatal(err)
-	}
+	// fact, err := svc.GetDogFact(context.TODO())
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
 
-	fmt.Printf("%+v\n", fact)
-	fmt.Println("xisd")
+	// fmt.Printf("%+v\n", fact)
+
+	ApiServer := NewApiServer(svc)
+	log.Fatal(ApiServer.Start(":3000"))
+
 }
